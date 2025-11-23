@@ -23,6 +23,7 @@ const figures: FigureBlock[] = [
 
 const App: React.FC = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +32,14 @@ const App: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -43,6 +52,7 @@ const App: React.FC = () => {
         top: offsetPosition,
         behavior: 'smooth'
       });
+      closeMobileMenu(); // Cerrar menú móvil después de navegar
     }
   };
 
@@ -58,7 +68,19 @@ const App: React.FC = () => {
           <div className="navbar-logo">
             <img src="/images/uninorte.png" alt="Universidad del Norte" />
           </div>
-          <ul className="navbar-links">
+          
+          {/* Botón hamburguesa para móvil */}
+          <button 
+            className="mobile-menu-toggle" 
+            onClick={toggleMobileMenu}
+            aria-label="Toggle menu"
+          >
+            <span className={`hamburger-line ${mobileMenuOpen ? 'open' : ''}`}></span>
+            <span className={`hamburger-line ${mobileMenuOpen ? 'open' : ''}`}></span>
+            <span className={`hamburger-line ${mobileMenuOpen ? 'open' : ''}`}></span>
+          </button>
+
+          <ul className={`navbar-links ${mobileMenuOpen ? 'mobile-open' : ''}`}>
             <li><a href="#introduccion" onClick={(e) => { e.preventDefault(); scrollToSection('introduccion'); }}>Introducción</a></li>
             <li><a href="#dataset" onClick={(e) => { e.preventDefault(); scrollToSection('dataset'); }}>Dataset</a></li>
             <li><a href="#analisis-graficas" onClick={(e) => { e.preventDefault(); scrollToSection('analisis-graficas'); }}>Análisis de gráficas</a></li>
@@ -67,6 +89,11 @@ const App: React.FC = () => {
           </ul>
         </div>
       </nav>
+      
+      {/* Overlay para cerrar menú móvil al hacer clic fuera */}
+      {mobileMenuOpen && (
+        <div className="mobile-menu-overlay" onClick={closeMobileMenu}></div>
+      )}
 
       <section className="intro-section" id="introduccion">
         <div className="intro-container">
