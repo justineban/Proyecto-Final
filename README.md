@@ -1,5 +1,9 @@
 # Análisis de Signos Vitales en UCI
 
+## 🌐 Página Web en Vivo
+
+**URL**: [https://analisis-de-resultados.netlify.app/](https://analisis-de-resultados.netlify.app/)
+
 ## Descripción del Proyecto
 
 Este proyecto desarrolla un análisis integral de signos vitales en pacientes de Unidad de Cuidados Intensivos (UCI) con el objetivo de identificar patrones fisiológicos asociados al riesgo clínico mediante técnicas de clustering no supervisado y modelos predictivos supervisados. El dashboard web presenta de forma profesional y académica los resultados del análisis exploratorio de datos (EDA), clustering y modelado predictivo realizado sobre un dataset de 1500 pacientes.
